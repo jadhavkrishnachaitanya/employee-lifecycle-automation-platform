@@ -122,16 +122,27 @@ def update_task_status(
     if old_status == new_status:
         return task
 
-    # Rule: If completing a task, check all prerequisites
-    if new_status == TaskStatus.COMPLETED.value and enforce_dependencies:
-        predecessors = get_task_predecessors(db, task)
-        uncompleted_preds = [p for p in predecessors if p.status != TaskStatus.COMPLETED.value]
-        if uncompleted_preds:
-            pred_titles = ", ".join([f"{p.title} ({p.task_id})" for p in uncompleted_preds])
-            raise OrchestrationError(
-                f"Cannot complete task '{task.title}': Prerequisite task(s) not completed: {pred_titles}",
-                code="PREREQUISITE_NOT_MET",
-            )
+    # Rule: If completing or starting a task, enforce blocking and prerequisites
+    if enforce_dependencies:
+        # 1. Reject completing or advancing any task that is currently marked blocked
+        if new_status in [TaskStatus.COMPLETED.value, TaskStatus.IN_PROGRESS.value]:
+            if task.is_blocked or task.status == TaskStatus.BLOCKED.value:
+                block_reason = task.blocked_reason or "Waiting for prerequisite steps"
+                raise OrchestrationError(
+                    f"Cannot transition task '{task.title}': Task is currently blocked ({block_reason})",
+                    code="TASK_BLOCKED",
+                )
+
+        # 2. Check explicit DAG predecessors if completing
+        if new_status == TaskStatus.COMPLETED.value:
+            predecessors = get_task_predecessors(db, task)
+            uncompleted_preds = [p for p in predecessors if p.status != TaskStatus.COMPLETED.value]
+            if uncompleted_preds:
+                pred_titles = ", ".join([f"{p.title} ({p.task_id})" for p in uncompleted_preds])
+                raise OrchestrationError(
+                    f"Cannot complete task '{task.title}': Prerequisite task(s) not completed: {pred_titles}",
+                    code="PREREQUISITE_NOT_MET",
+                )
 
     # Record event
     event_count = db.query(TaskStatusEvent).count() + 1
@@ -201,14 +212,15 @@ def recalculate_case_tasks_blocking(db: Session, case_id: str):
                     if successor_task.status == TaskStatus.PENDING.value:
                         successor_task.status = TaskStatus.BLOCKED.value
                 else:
-                    if successor_task.is_blocked and successor_task.status == TaskStatus.BLOCKED.value:
+                    if successor_task.is_blocked:
                         # Check if any OTHER predecessor is still pending
                         all_preds = get_task_predecessors(db, successor_task)
                         still_pending = [p for p in all_preds if p.status != TaskStatus.COMPLETED.value]
                         if not still_pending:
                             successor_task.is_blocked = False
                             successor_task.blocked_reason = None
-                            successor_task.status = TaskStatus.PENDING.value
+                            if successor_task.status == TaskStatus.BLOCKED.value:
+                                successor_task.status = TaskStatus.PENDING.value
 
 
 def check_and_update_case_completion(

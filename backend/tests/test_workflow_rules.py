@@ -288,3 +288,104 @@ def test_asset_assignment_and_recovery(isolated_db: Session):
     assert recovered_asset.status == AssetStatus.AVAILABLE.value
     isolated_db.refresh(asgn1)
     assert asgn1.status == AssignmentStatus.RETURNED.value
+
+
+def test_regression_blocked_task_completion_rejected_without_mutation(isolated_db: Session):
+    """
+    Regression test: Verifies that attempting to complete a task marked as is_blocked=True
+    raises OrchestrationError(code='TASK_BLOCKED'), and strictly guarantees that:
+    1. The task status is NOT mutated.
+    2. completed_at is NOT set.
+    3. is_blocked remains True.
+    4. Zero TaskStatusEvent rows are created.
+    5. Zero AuditEvent rows are created.
+    """
+    case = isolated_db.query(OnboardingCase).first()
+    assert case is not None
+
+    # Pick task 4 (Provision Core Hardware & Peripherals)
+    task4 = (
+        isolated_db.query(TaskInstance)
+        .filter(TaskInstance.case_id == case.case_id, TaskInstance.template_id == "TPL-004")
+        .first()
+    )
+    assert task4 is not None
+
+    # Ensure task4 is blocked with a reason
+    task4.status = TaskStatus.PENDING.value
+    task4.is_blocked = True
+    task4.blocked_reason = "Waiting for prerequisite steps"
+    task4.completed_at = None
+    isolated_db.commit()
+
+    events_before = (
+        isolated_db.query(TaskStatusEvent)
+        .filter(TaskStatusEvent.task_id == task4.task_id)
+        .count()
+    )
+    audits_before = (
+        isolated_db.query(AuditEvent)
+        .filter(AuditEvent.entity_id == task4.task_id)
+        .count()
+    )
+
+    # Attempting to complete task4 must be rejected
+    with pytest.raises(OrchestrationError) as exc_info:
+        update_task_status(
+            db=isolated_db,
+            task_id=task4.task_id,
+            new_status=TaskStatus.COMPLETED.value,
+            actor="UI_USER",
+            reason="Test Block click in UI",
+            enforce_dependencies=True,
+        )
+
+    assert exc_info.value.code == "TASK_BLOCKED"
+    assert "Task is currently blocked" in str(exc_info.value)
+
+    # Re-query task to verify zero state mutation
+    isolated_db.expire_all()
+    reloaded_task = (
+        isolated_db.query(TaskInstance)
+        .filter(TaskInstance.task_id == task4.task_id)
+        .first()
+    )
+    assert reloaded_task.status == TaskStatus.PENDING.value
+    assert reloaded_task.is_blocked is True
+    assert reloaded_task.completed_at is None
+    assert reloaded_task.blocked_reason == "Waiting for prerequisite steps"
+
+    # Verify NO events were recorded
+    events_after = (
+        isolated_db.query(TaskStatusEvent)
+        .filter(TaskStatusEvent.task_id == task4.task_id)
+        .count()
+    )
+    audits_after = (
+        isolated_db.query(AuditEvent)
+        .filter(AuditEvent.entity_id == task4.task_id)
+        .count()
+    )
+    assert events_after == events_before
+    assert audits_after == audits_before
+
+
+def test_regression_blocked_task_start_rejected_without_mutation(isolated_db: Session):
+    """Verifies that attempting to transition a blocked task to IN_PROGRESS is also rejected."""
+    case = isolated_db.query(OnboardingCase).first()
+    task = (
+        isolated_db.query(TaskInstance)
+        .filter(TaskInstance.case_id == case.case_id, TaskInstance.is_blocked == True)
+        .first()
+    )
+    assert task is not None
+
+    with pytest.raises(OrchestrationError) as exc_info:
+        update_task_status(
+            db=isolated_db,
+            task_id=task.task_id,
+            new_status=TaskStatus.IN_PROGRESS.value,
+            actor="TEST_USER",
+            enforce_dependencies=True,
+        )
+    assert exc_info.value.code == "TASK_BLOCKED"
