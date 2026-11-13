@@ -1,0 +1,6 @@
+manager_id,name,email,department_id,management_level,created_at
+MGR-001,Lauren Nash,lauren.nash.mgr@yottaflex.internal,DEP-01,L2,2026-01-05 00:00:00+00:00
+MGR-002,Rodney Hall,rodney.hall.mgr@yottaflex.internal,DEP-02,L2,2026-01-05 00:00:00+00:00
+MGR-003,Roger Anderson,roger.anderson.mgr@yottaflex.internal,DEP-03,L3,2026-01-05 00:00:00+00:00
+MGR-004,Eric Miles,eric.miles.mgr@yottaflex.internal,DEP-04,L1,2026-01-05 00:00:00+00:00
+MGR-005,Ashley Lee,ashley.lee.mgr@yottaflex.internal,DEP-05,L3,2026-01-05 00:00:00+00:00

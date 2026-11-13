@@ -1,0 +1,9 @@
+template_id,title,description,owner_team,default_sla_days,is_mandatory,sequence_order,phase
+TPL-001,Verify Identity & I-9 Documents,HR verifies legal identity documents and I-9 work authorization prior to work start.,HR,2,True,1,PRE_START
+TPL-002,Background Check Screening,"Third-party criminal, credit, and education background verification clearance.",HR,5,True,2,PRE_START
+TPL-003,Create Corporate Email & SSO Identity,IT provisions corporate Google/Okta identity and SSO directory entry.,IT,1,True,3,DAY_ONE
+TPL-004,Provision Core Hardware & Peripherals,"Facilities/IT ships corporate laptop, monitor, and security token.",FACILITIES,3,True,4,DAY_ONE
+TPL-005,Request Role-Specific System Access,"IT submits and verifies role-based entitlements in GitHub, AWS, Jira, and ERP.",IT,2,True,5,DAY_ONE
+TPL-006,Manager 1-on-1 & Team Introduction,"Direct manager conducts initial kickoff, role alignment, and assigns buddy.",MANAGER,1,True,6,DAY_ONE
+TPL-007,Security Compliance & Data Privacy Training,"Employee completes mandatory SOC2, GDPR, and security awareness modules.",SECURITY,4,True,7,FIRST_WEEK
+TPL-008,Final Onboarding Clearance & Sign-Off,"HR verifies background check, access, assets, and training completion for full active status.",HR,1,True,8,POST_START

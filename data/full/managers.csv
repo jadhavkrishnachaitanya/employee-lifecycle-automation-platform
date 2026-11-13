@@ -1,0 +1,51 @@
+manager_id,name,email,department_id,management_level,created_at
+MGR-001,Lauren Nash,lauren.nash.mgr@yottaflex.internal,DEP-01,L2,2026-01-05 00:00:00+00:00
+MGR-002,Rodney Hall,rodney.hall.mgr@yottaflex.internal,DEP-02,L2,2026-01-05 00:00:00+00:00
+MGR-003,Roger Anderson,roger.anderson.mgr@yottaflex.internal,DEP-03,L3,2026-01-05 00:00:00+00:00
+MGR-004,Eric Miles,eric.miles.mgr@yottaflex.internal,DEP-04,L1,2026-01-05 00:00:00+00:00
+MGR-005,Ashley Lee,ashley.lee.mgr@yottaflex.internal,DEP-05,L3,2026-01-05 00:00:00+00:00
+MGR-006,Brian Garza,brian.garza.mgr@yottaflex.internal,DEP-06,L1,2026-01-05 00:00:00+00:00
+MGR-007,Brian Thomas,brian.thomas.mgr@yottaflex.internal,DEP-07,L1,2026-01-05 00:00:00+00:00
+MGR-008,Anthony Bass,anthony.bass.mgr@yottaflex.internal,DEP-08,L3,2026-01-05 00:00:00+00:00
+MGR-009,Jim Sexton,jim.sexton.mgr@yottaflex.internal,DEP-01,L1,2026-01-05 00:00:00+00:00
+MGR-010,Kayla Palmer,kayla.palmer.mgr@yottaflex.internal,DEP-02,L1,2026-01-05 00:00:00+00:00
+MGR-011,Christopher Gilbert,christopher.gilbert.mgr@yottaflex.internal,DEP-03,L1,2026-01-05 00:00:00+00:00
+MGR-012,Brandon Bryant,brandon.bryant.mgr@yottaflex.internal,DEP-04,L2,2026-01-05 00:00:00+00:00
+MGR-013,Amber Nash,amber.nash.mgr@yottaflex.internal,DEP-05,L2,2026-01-05 00:00:00+00:00
+MGR-014,Christine Brown,christine.brown.mgr@yottaflex.internal,DEP-06,L1,2026-01-05 00:00:00+00:00
+MGR-015,Brendan Wagner,brendan.wagner.mgr@yottaflex.internal,DEP-07,L1,2026-01-05 00:00:00+00:00
+MGR-016,Benjamin Robinson,benjamin.robinson.mgr@yottaflex.internal,DEP-08,L1,2026-01-05 00:00:00+00:00
+MGR-017,Karen Jones DDS,karen.jones.dds.mgr@yottaflex.internal,DEP-01,L1,2026-01-05 00:00:00+00:00
+MGR-018,Holly Wise,holly.wise.mgr@yottaflex.internal,DEP-02,L2,2026-01-05 00:00:00+00:00
+MGR-019,Wendy Smith,wendy.smith.mgr@yottaflex.internal,DEP-03,L1,2026-01-05 00:00:00+00:00
+MGR-020,Mr. Allen Fletcher,mr..allen.fletcher.mgr@yottaflex.internal,DEP-04,L1,2026-01-05 00:00:00+00:00
+MGR-021,Jose Rodgers,jose.rodgers.mgr@yottaflex.internal,DEP-05,L1,2026-01-05 00:00:00+00:00
+MGR-022,Monique Vincent,monique.vincent.mgr@yottaflex.internal,DEP-06,L1,2026-01-05 00:00:00+00:00
+MGR-023,Ryan Wilson,ryan.wilson.mgr@yottaflex.internal,DEP-07,L1,2026-01-05 00:00:00+00:00
+MGR-024,Lauren Williams,lauren.williams.mgr@yottaflex.internal,DEP-08,L3,2026-01-05 00:00:00+00:00
+MGR-025,Jonathan Smith,jonathan.smith.mgr@yottaflex.internal,DEP-01,L1,2026-01-05 00:00:00+00:00
+MGR-026,Jessica Stevens,jessica.stevens.mgr@yottaflex.internal,DEP-02,L2,2026-01-05 00:00:00+00:00
+MGR-027,Curtis Odom,curtis.odom.mgr@yottaflex.internal,DEP-03,DIRECTOR,2026-01-05 00:00:00+00:00
+MGR-028,Lindsey Vance,lindsey.vance.mgr@yottaflex.internal,DEP-04,L2,2026-01-05 00:00:00+00:00
+MGR-029,Molly Frost,molly.frost.mgr@yottaflex.internal,DEP-05,L2,2026-01-05 00:00:00+00:00
+MGR-030,Matthew Scott,matthew.scott.mgr@yottaflex.internal,DEP-06,L2,2026-01-05 00:00:00+00:00
+MGR-031,Jennifer Robles,jennifer.robles.mgr@yottaflex.internal,DEP-07,L1,2026-01-05 00:00:00+00:00
+MGR-032,Heather Navarro,heather.navarro.mgr@yottaflex.internal,DEP-08,L1,2026-01-05 00:00:00+00:00
+MGR-033,Cassandra Mason,cassandra.mason.mgr@yottaflex.internal,DEP-01,L2,2026-01-05 00:00:00+00:00
+MGR-034,Edgar Hernandez,edgar.hernandez.mgr@yottaflex.internal,DEP-02,L1,2026-01-05 00:00:00+00:00
+MGR-035,Amanda Bowman DVM,amanda.bowman.dvm.mgr@yottaflex.internal,DEP-03,L1,2026-01-05 00:00:00+00:00
+MGR-036,Melissa Adams,melissa.adams.mgr@yottaflex.internal,DEP-04,L2,2026-01-05 00:00:00+00:00
+MGR-037,Olivia Dixon DVM,olivia.dixon.dvm.mgr@yottaflex.internal,DEP-05,L3,2026-01-05 00:00:00+00:00
+MGR-038,Paul Gould,paul.gould.mgr@yottaflex.internal,DEP-06,L1,2026-01-05 00:00:00+00:00
+MGR-039,Timothy Hoffman,timothy.hoffman.mgr@yottaflex.internal,DEP-07,L3,2026-01-05 00:00:00+00:00
+MGR-040,David Knight,david.knight.mgr@yottaflex.internal,DEP-08,DIRECTOR,2026-01-05 00:00:00+00:00
+MGR-041,Jeffrey Ray,jeffrey.ray.mgr@yottaflex.internal,DEP-01,L1,2026-01-05 00:00:00+00:00
+MGR-042,Jared Drake,jared.drake.mgr@yottaflex.internal,DEP-02,L1,2026-01-05 00:00:00+00:00
+MGR-043,Shawn Lawson,shawn.lawson.mgr@yottaflex.internal,DEP-03,L1,2026-01-05 00:00:00+00:00
+MGR-044,Nicholas Ball,nicholas.ball.mgr@yottaflex.internal,DEP-04,L1,2026-01-05 00:00:00+00:00
+MGR-045,Joseph Brown,joseph.brown.mgr@yottaflex.internal,DEP-05,L2,2026-01-05 00:00:00+00:00
+MGR-046,Brittany Henry,brittany.henry.mgr@yottaflex.internal,DEP-06,L1,2026-01-05 00:00:00+00:00
+MGR-047,Jamie Brown,jamie.brown.mgr@yottaflex.internal,DEP-07,L1,2026-01-05 00:00:00+00:00
+MGR-048,Kara Hickman,kara.hickman.mgr@yottaflex.internal,DEP-08,L1,2026-01-05 00:00:00+00:00
+MGR-049,Jennifer Coleman,jennifer.coleman.mgr@yottaflex.internal,DEP-01,VP,2026-01-05 00:00:00+00:00
+MGR-050,Patrick Cook,patrick.cook.mgr@yottaflex.internal,DEP-02,L2,2026-01-05 00:00:00+00:00

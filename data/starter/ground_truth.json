@@ -1,0 +1,128 @@
+[
+  {
+    "issue_id": "ISS-000001",
+    "entity_id": "EMP-000007",
+    "issue_type": "DEPARTMENT_CHANGE_MID_PROCESS",
+    "expected_label": "REVIEW_REQUIRED",
+    "severity": "MEDIUM",
+    "evidence": "{\"employee_id\": \"EMP-000007\", \"original_dept\": \"DEP-07\", \"new_dept\": \"DEP-08\", \"transfer_date\": \"2026-11-01 00:00:00+00:00\", \"onboarding_active\": true}",
+    "rule_id": "RULE-ONB-007"
+  },
+  {
+    "issue_id": "ISS-000002",
+    "entity_id": "EMP-000008",
+    "issue_type": "MISSING_MANAGER",
+    "expected_label": "VIOLATION",
+    "severity": "HIGH",
+    "evidence": "{\"employee_id\": \"EMP-000008\", \"department_id\": \"DEP-08\", \"manager_id\": null}",
+    "rule_id": "RULE-ORG-002"
+  },
+  {
+    "issue_id": "ISS-000003",
+    "entity_id": "EMP-000019",
+    "issue_type": "MISSING_MANAGER",
+    "expected_label": "VIOLATION",
+    "severity": "HIGH",
+    "evidence": "{\"employee_id\": \"EMP-000019\", \"department_id\": \"DEP-03\", \"manager_id\": null}",
+    "rule_id": "RULE-ORG-002"
+  },
+  {
+    "issue_id": "ISS-000004",
+    "entity_id": "EMP-000022",
+    "issue_type": "DEPARTMENT_CHANGE_MID_PROCESS",
+    "expected_label": "REVIEW_REQUIRED",
+    "severity": "MEDIUM",
+    "evidence": "{\"employee_id\": \"EMP-000022\", \"original_dept\": \"DEP-06\", \"new_dept\": \"DEP-07\", \"transfer_date\": \"2026-10-02 00:00:00+00:00\", \"onboarding_active\": true}",
+    "rule_id": "RULE-ONB-007"
+  },
+  {
+    "issue_id": "ISS-000005",
+    "entity_id": "TASK-ONB-ONB-2026-000003-003",
+    "issue_type": "TASK_COMPLETED_BEFORE_PREREQUISITE",
+    "expected_label": "VIOLATION",
+    "severity": "HIGH",
+    "evidence": "{\"task_id\": \"TASK-ONB-ONB-2026-000003-003\", \"task_title\": \"Create Corporate Email & SSO Identity\", \"prerequisite_task_id\": \"TASK-ONB-ONB-2026-000003-001\", \"prerequisite_task_title\": \"Verify Identity & I-9 Documents\", \"task_completed_at\": \"2026-10-28 00:00:00+00:00\", \"prerequisite_status\": \"PENDING\"}",
+    "rule_id": "RULE-TASK-001"
+  },
+  {
+    "issue_id": "ISS-000006",
+    "entity_id": "TASK-ONB-ONB-2026-000004-004",
+    "issue_type": "OVERDUE_INCOMPLETE_TASK",
+    "expected_label": "VIOLATION",
+    "severity": "MEDIUM",
+    "evidence": "{\"task_id\": \"TASK-ONB-ONB-2026-000004-004\", \"case_id\": \"ONB-2026-000004\", \"task_title\": \"Provision Core Hardware & Peripherals\", \"due_date\": \"2026-10-24 00:00:00+00:00\", \"reference_date\": \"2026-11-01 00:00:00+00:00\", \"days_overdue\": 8, \"status\": \"IN_PROGRESS\"}",
+    "rule_id": "RULE-TASK-006"
+  },
+  {
+    "issue_id": "ISS-000007",
+    "entity_id": "EMP-000012",
+    "issue_type": "STARTED_BEFORE_BACKGROUND_CHECK",
+    "expected_label": "VIOLATION",
+    "severity": "CRITICAL",
+    "evidence": "{\"employee_id\": \"EMP-000012\", \"employee_status\": \"ACTIVE\", \"start_date\": \"2026-10-22 00:00:00+00:00\", \"bg_task_id\": \"TASK-ONB-ONB-2026-000012-002\", \"bg_task_status\": \"PENDING\"}",
+    "rule_id": "RULE-ONB-004"
+  },
+  {
+    "issue_id": "ISS-000008",
+    "entity_id": "TASK-ONB-ONB-2026-000014-004",
+    "issue_type": "OVERDUE_INCOMPLETE_TASK",
+    "expected_label": "VIOLATION",
+    "severity": "MEDIUM",
+    "evidence": "{\"task_id\": \"TASK-ONB-ONB-2026-000014-004\", \"case_id\": \"ONB-2026-000014\", \"task_title\": \"Provision Core Hardware & Peripherals\", \"due_date\": \"2026-10-24 00:00:00+00:00\", \"reference_date\": \"2026-11-01 00:00:00+00:00\", \"days_overdue\": 8, \"status\": \"IN_PROGRESS\"}",
+    "rule_id": "RULE-TASK-006"
+  },
+  {
+    "issue_id": "ISS-000009",
+    "entity_id": "TASK-ONB-ONB-2026-000018-003",
+    "issue_type": "TASK_COMPLETED_BEFORE_PREREQUISITE",
+    "expected_label": "VIOLATION",
+    "severity": "HIGH",
+    "evidence": "{\"task_id\": \"TASK-ONB-ONB-2026-000018-003\", \"task_title\": \"Create Corporate Email & SSO Identity\", \"prerequisite_task_id\": \"TASK-ONB-ONB-2026-000018-001\", \"prerequisite_task_title\": \"Verify Identity & I-9 Documents\", \"task_completed_at\": \"2026-10-28 00:00:00+00:00\", \"prerequisite_status\": \"PENDING\"}",
+    "rule_id": "RULE-TASK-001"
+  },
+  {
+    "issue_id": "ISS-000010",
+    "entity_id": "TASK-ONB-ONB-2026-000024-004",
+    "issue_type": "OVERDUE_INCOMPLETE_TASK",
+    "expected_label": "VIOLATION",
+    "severity": "MEDIUM",
+    "evidence": "{\"task_id\": \"TASK-ONB-ONB-2026-000024-004\", \"case_id\": \"ONB-2026-000024\", \"task_title\": \"Provision Core Hardware & Peripherals\", \"due_date\": \"2026-10-24 00:00:00+00:00\", \"reference_date\": \"2026-11-01 00:00:00+00:00\", \"days_overdue\": 8, \"status\": \"IN_PROGRESS\"}",
+    "rule_id": "RULE-TASK-006"
+  },
+  {
+    "issue_id": "ISS-000011",
+    "entity_id": "EMP-000025",
+    "issue_type": "STARTED_BEFORE_BACKGROUND_CHECK",
+    "expected_label": "VIOLATION",
+    "severity": "CRITICAL",
+    "evidence": "{\"employee_id\": \"EMP-000025\", \"employee_status\": \"ACTIVE\", \"start_date\": \"2026-10-22 00:00:00+00:00\", \"bg_task_id\": \"TASK-ONB-ONB-2026-000025-002\", \"bg_task_status\": \"PENDING\"}",
+    "rule_id": "RULE-ONB-004"
+  },
+  {
+    "issue_id": "ISS-000012",
+    "entity_id": "AST-LAP-000003",
+    "issue_type": "ASSET_DOUBLE_ASSIGNMENT",
+    "expected_label": "VIOLATION",
+    "severity": "HIGH",
+    "evidence": "{\"asset_id\": \"AST-LAP-000003\", \"asset_tag\": \"YF-LAP-000003\", \"assignment_1\": {\"id\": \"ASGN-000003\", \"employee_id\": \"EMP-000003\", \"assigned_date\": \"2026-11-02 00:00:00+00:00\", \"status\": \"ACTIVE\"}, \"assignment_2\": {\"id\": \"ASGN-000004\", \"employee_id\": \"EMP-000004\", \"assigned_date\": \"2026-11-04 00:00:00+00:00\", \"status\": \"ACTIVE\"}}",
+    "rule_id": "RULE-AST-003"
+  },
+  {
+    "issue_id": "ISS-000013",
+    "entity_id": "GRANT-000004",
+    "issue_type": "TERMINATED_EMPLOYEE_ACTIVE_ACCESS",
+    "expected_label": "VIOLATION",
+    "severity": "CRITICAL",
+    "evidence": "{\"grant_id\": \"GRANT-000004\", \"employee_id\": \"EMP-000005\", \"employee_status\": \"TERMINATED\", \"termination_date\": \"2026-10-27 00:00:00+00:00\", \"system_name\": \"ERP_FINANCE\", \"grant_status\": \"ACTIVE\"}",
+    "rule_id": "RULE-ACC-005"
+  },
+  {
+    "issue_id": "ISS-000014",
+    "entity_id": "GRANT-000010",
+    "issue_type": "TERMINATED_EMPLOYEE_ACTIVE_ACCESS",
+    "expected_label": "VIOLATION",
+    "severity": "CRITICAL",
+    "evidence": "{\"grant_id\": \"GRANT-000010\", \"employee_id\": \"EMP-000015\", \"employee_status\": \"TERMINATED\", \"termination_date\": \"2026-10-27 00:00:00+00:00\", \"system_name\": \"EMAIL_SLACK\", \"grant_status\": \"ACTIVE\"}",
+    "rule_id": "RULE-ACC-005"
+  }
+]

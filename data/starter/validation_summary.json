@@ -1,0 +1,300 @@
+{
+  "validation_status": "PASSED",
+  "reference_date": "2026-11-01 00:00:00+00:00",
+  "total_records_checked": 280,
+  "total_rules_evaluated": 10,
+  "total_anomalies_detected": 14,
+  "anomaly_counts_by_type": {
+    "TASK_COMPLETED_BEFORE_PREREQUISITE": 2,
+    "MISSING_MANAGER": 2,
+    "ASSET_DOUBLE_ASSIGNMENT": 1,
+    "STARTED_BEFORE_BACKGROUND_CHECK": 2,
+    "TERMINATED_EMPLOYEE_ACTIVE_ACCESS": 2,
+    "OVERDUE_INCOMPLETE_TASK": 3,
+    "DEPARTMENT_CHANGE_MID_PROCESS": 2
+  },
+  "integrity_failures": [],
+  "detected_issues": [
+    {
+      "rule_id": "RULE-TASK-001",
+      "issue_type": "TASK_COMPLETED_BEFORE_PREREQUISITE",
+      "entity_id": "TASK-ONB-ONB-2026-000003-003",
+      "severity": "HIGH",
+      "evidence": {
+        "task_id": "TASK-ONB-ONB-2026-000003-003",
+        "task_title": "Create Corporate Email & SSO Identity",
+        "prerequisite_task_id": "TASK-ONB-ONB-2026-000003-001",
+        "prerequisite_task_title": "Verify Identity & I-9 Documents",
+        "successor_completed_at": "2026-10-28 00:00:00+00:00",
+        "predecessor_completed_at": "None",
+        "predecessor_status": "PENDING"
+      }
+    },
+    {
+      "rule_id": "RULE-TASK-001",
+      "issue_type": "TASK_COMPLETED_BEFORE_PREREQUISITE",
+      "entity_id": "TASK-ONB-ONB-2026-000018-003",
+      "severity": "HIGH",
+      "evidence": {
+        "task_id": "TASK-ONB-ONB-2026-000018-003",
+        "task_title": "Create Corporate Email & SSO Identity",
+        "prerequisite_task_id": "TASK-ONB-ONB-2026-000018-001",
+        "prerequisite_task_title": "Verify Identity & I-9 Documents",
+        "successor_completed_at": "2026-10-28 00:00:00+00:00",
+        "predecessor_completed_at": "None",
+        "predecessor_status": "PENDING"
+      }
+    },
+    {
+      "rule_id": "RULE-ORG-002",
+      "issue_type": "MISSING_MANAGER",
+      "entity_id": "EMP-000008",
+      "severity": "HIGH",
+      "evidence": {
+        "employee_id": "EMP-000008",
+        "department_id": "DEP-08",
+        "role_id": "ROL-12",
+        "reason": "Employee has null manager_id in organizational hierarchy"
+      }
+    },
+    {
+      "rule_id": "RULE-ORG-002",
+      "issue_type": "MISSING_MANAGER",
+      "entity_id": "EMP-000019",
+      "severity": "HIGH",
+      "evidence": {
+        "employee_id": "EMP-000019",
+        "department_id": "DEP-03",
+        "role_id": "ROL-06",
+        "reason": "Employee has null manager_id in organizational hierarchy"
+      }
+    },
+    {
+      "rule_id": "RULE-AST-003",
+      "issue_type": "ASSET_DOUBLE_ASSIGNMENT",
+      "entity_id": "AST-LAP-000003",
+      "severity": "HIGH",
+      "evidence": {
+        "asset_id": "AST-LAP-000003",
+        "active_assignment_count": 2,
+        "assignment_ids": [
+          "ASGN-000003",
+          "ASGN-000004"
+        ],
+        "employee_ids": [
+          "EMP-000003",
+          "EMP-000004"
+        ]
+      }
+    },
+    {
+      "rule_id": "RULE-ONB-004",
+      "issue_type": "STARTED_BEFORE_BACKGROUND_CHECK",
+      "entity_id": "EMP-000012",
+      "severity": "CRITICAL",
+      "evidence": {
+        "employee_id": "EMP-000012",
+        "start_date": "2026-10-22 00:00:00+00:00",
+        "bg_task_id": "TASK-ONB-ONB-2026-000012-002",
+        "bg_task_status": "PENDING",
+        "bg_completed_at": "None"
+      }
+    },
+    {
+      "rule_id": "RULE-ONB-004",
+      "issue_type": "STARTED_BEFORE_BACKGROUND_CHECK",
+      "entity_id": "EMP-000025",
+      "severity": "CRITICAL",
+      "evidence": {
+        "employee_id": "EMP-000025",
+        "start_date": "2026-10-22 00:00:00+00:00",
+        "bg_task_id": "TASK-ONB-ONB-2026-000025-002",
+        "bg_task_status": "PENDING",
+        "bg_completed_at": "None"
+      }
+    },
+    {
+      "rule_id": "RULE-ACC-005",
+      "issue_type": "TERMINATED_EMPLOYEE_ACTIVE_ACCESS",
+      "entity_id": "GRANT-000004",
+      "severity": "CRITICAL",
+      "evidence": {
+        "grant_id": "GRANT-000004",
+        "employee_id": "EMP-000005",
+        "system_name": "ERP_FINANCE",
+        "termination_date": "2026-10-27 00:00:00+00:00",
+        "grant_status": "ACTIVE",
+        "reason": "Active system access grant persists after employee termination"
+      }
+    },
+    {
+      "rule_id": "RULE-ACC-005",
+      "issue_type": "TERMINATED_EMPLOYEE_ACTIVE_ACCESS",
+      "entity_id": "GRANT-000010",
+      "severity": "CRITICAL",
+      "evidence": {
+        "grant_id": "GRANT-000010",
+        "employee_id": "EMP-000015",
+        "system_name": "EMAIL_SLACK",
+        "termination_date": "2026-10-27 00:00:00+00:00",
+        "grant_status": "ACTIVE",
+        "reason": "Active system access grant persists after employee termination"
+      }
+    },
+    {
+      "rule_id": "RULE-TASK-006",
+      "issue_type": "OVERDUE_INCOMPLETE_TASK",
+      "entity_id": "TASK-ONB-ONB-2026-000004-004",
+      "severity": "MEDIUM",
+      "evidence": {
+        "task_id": "TASK-ONB-ONB-2026-000004-004",
+        "case_id": "ONB-2026-000004",
+        "title": "Provision Core Hardware & Peripherals",
+        "due_date": "2026-10-24 00:00:00+00:00",
+        "reference_date": "2026-11-01 00:00:00+00:00",
+        "days_overdue": 8,
+        "status": "IN_PROGRESS"
+      }
+    },
+    {
+      "rule_id": "RULE-TASK-006",
+      "issue_type": "OVERDUE_INCOMPLETE_TASK",
+      "entity_id": "TASK-ONB-ONB-2026-000014-004",
+      "severity": "MEDIUM",
+      "evidence": {
+        "task_id": "TASK-ONB-ONB-2026-000014-004",
+        "case_id": "ONB-2026-000014",
+        "title": "Provision Core Hardware & Peripherals",
+        "due_date": "2026-10-24 00:00:00+00:00",
+        "reference_date": "2026-11-01 00:00:00+00:00",
+        "days_overdue": 8,
+        "status": "IN_PROGRESS"
+      }
+    },
+    {
+      "rule_id": "RULE-TASK-006",
+      "issue_type": "OVERDUE_INCOMPLETE_TASK",
+      "entity_id": "TASK-ONB-ONB-2026-000024-004",
+      "severity": "MEDIUM",
+      "evidence": {
+        "task_id": "TASK-ONB-ONB-2026-000024-004",
+        "case_id": "ONB-2026-000024",
+        "title": "Provision Core Hardware & Peripherals",
+        "due_date": "2026-10-24 00:00:00+00:00",
+        "reference_date": "2026-11-01 00:00:00+00:00",
+        "days_overdue": 8,
+        "status": "IN_PROGRESS"
+      }
+    },
+    {
+      "rule_id": "RULE-ONB-007",
+      "issue_type": "DEPARTMENT_CHANGE_MID_PROCESS",
+      "entity_id": "EMP-000007",
+      "severity": "MEDIUM",
+      "evidence": {
+        "employee_id": "EMP-000007",
+        "transfer_history_id": "EDH-000008",
+        "new_department_id": "DEP-08",
+        "transfer_date": "2026-11-01 00:00:00+00:00",
+        "onboarding_case_id": "ONB-2026-000007",
+        "onboarding_status": "IN_PROGRESS"
+      }
+    },
+    {
+      "rule_id": "RULE-ONB-007",
+      "issue_type": "DEPARTMENT_CHANGE_MID_PROCESS",
+      "entity_id": "EMP-000022",
+      "severity": "MEDIUM",
+      "evidence": {
+        "employee_id": "EMP-000022",
+        "transfer_history_id": "EDH-000024",
+        "new_department_id": "DEP-07",
+        "transfer_date": "2026-10-02 00:00:00+00:00",
+        "onboarding_case_id": "ONB-2026-000022",
+        "onboarding_status": "COMPLETED"
+      }
+    }
+  ],
+  "evaluation_metrics": {
+    "true_positives": 14,
+    "false_positives": 0,
+    "false_negatives": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0,
+    "total_ground_truth": 14,
+    "total_detected": 14,
+    "per_issue_breakdown": {
+      "ASSET_DOUBLE_ASSIGNMENT": {
+        "ground_truth_count": 1,
+        "detected_count": 1,
+        "true_positives": 1,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0
+      },
+      "DEPARTMENT_CHANGE_MID_PROCESS": {
+        "ground_truth_count": 2,
+        "detected_count": 2,
+        "true_positives": 2,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0
+      },
+      "MISSING_MANAGER": {
+        "ground_truth_count": 2,
+        "detected_count": 2,
+        "true_positives": 2,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0
+      },
+      "OVERDUE_INCOMPLETE_TASK": {
+        "ground_truth_count": 3,
+        "detected_count": 3,
+        "true_positives": 3,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0
+      },
+      "STARTED_BEFORE_BACKGROUND_CHECK": {
+        "ground_truth_count": 2,
+        "detected_count": 2,
+        "true_positives": 2,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0
+      },
+      "TASK_COMPLETED_BEFORE_PREREQUISITE": {
+        "ground_truth_count": 2,
+        "detected_count": 2,
+        "true_positives": 2,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0
+      },
+      "TERMINATED_EMPLOYEE_ACTIVE_ACCESS": {
+        "ground_truth_count": 2,
+        "detected_count": 2,
+        "true_positives": 2,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0
+      }
+    }
+  }
+}

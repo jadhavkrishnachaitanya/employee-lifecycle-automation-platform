@@ -1,0 +1,132 @@
+{
+  "manifest_version": "1.0.0",
+  "project": "YottaFlex Employee Lifecycle Orchestrator",
+  "generator_version": "2.0.0",
+  "seed": 20261022,
+  "scale": "full",
+  "reference_date": "2026-11-01 00:00:00+00:00",
+  "provenance": {
+    "synthetic_engine": "Faker + Deterministic LCG + Rule-Based Anomaly Injector",
+    "confidentiality_statement": "100% synthetic data generated for challenge evaluation. No proprietary or real credentials used."
+  },
+  "row_counts": {
+    "departments": 8,
+    "roles": 12,
+    "managers": 50,
+    "employees": 500,
+    "onboarding_cases": 500,
+    "task_instances": 4000,
+    "assets": 600,
+    "asset_assignments": 504,
+    "access_requests": 300,
+    "approvals": 267,
+    "access_grants": 205,
+    "offboarding_cases": 7,
+    "ground_truth_records": 36,
+    "detected_anomalies": 36
+  },
+  "file_checksums": {
+    "access_grants.csv": "6ed5614d84e026b617cc5c467728532d1aaad543a838819e9ed883dbe57dbaa6",
+    "access_requests.csv": "e62f03be29a5dadc17581c3e23181c82a68a61a4621c7825a244103affe736a1",
+    "approvals.csv": "be4afc6a32817d47512c1323f85f15dfe01bdb70a7758ea6e9088b16c239c1e9",
+    "asset_assignments.csv": "50a5270533260a980e30017148716403a6b69b512faeda26137d5cce4beb6485",
+    "assets.csv": "daf2ec29095e06b99b73e520d81be3de2b136d59dd954f57570bcdab61e6185f",
+    "departments.csv": "343dc0d8fc1807b25bac4eaa61857562049c17cdd51931a2eb320fe0b7bc7373",
+    "employee_department_history.csv": "0f52daef1dc4d575d3b228a38b0811d8e7a63040ece58a0c623626c64299c248",
+    "employees.csv": "1f9a71c93ae6ffad41e031c300cbf75802271281e4d4de3f92ead07fdd190a8d",
+    "ground_truth.csv": "ebf8345bdb27e90942cabc883487948a139b9d44e565760b5829193a5a1ed6f1",
+    "ground_truth.json": "01e80589dd636d9d6d9383e68c0d64c0ae323227880ae4acfd2c22c599dc9a68",
+    "managers.csv": "1534e80a39452f2add4cdf9515bcc26b280ca9f866783dbe0096f37cfaff12d7",
+    "offboarding_cases.csv": "ddc3dce0d8e5db99bf14a77d75d0d0c39acb50edce137457ca55c324a7238af6",
+    "onboarding_cases.csv": "e16254f3c61ba9185f6419585863bb861601f40a2eef7ece7b09d62980002908",
+    "orchestrator.db": "47738468d0f5d65fcf33bd9f2562218d20750b881807499a91e06008658fe921",
+    "roles.csv": "b35c89c93bdbe92cf3257fdf600eb8c4deb9a6b829f0d997b06dd7d08a873710",
+    "seed.sql": "977315fa3fae0c6a260ec44d2b1a421b5b610c340f09afcbe3e4d628e9a291ea",
+    "task_dependencies.csv": "eba2806a9faaa8f116addc394a2fd84e0976afe0084a9baf113f34e74110a8be",
+    "task_instances.csv": "ebc94a00be2f0209142939575d39377b4375bd85608b90229a7ca518c5d6ac80",
+    "task_templates.csv": "0220118cc822dc55e2f3e4d094f8ba66158690f5725ad0b6e7b28df6507ba68b",
+    "validation_summary.json": "8d4b431052bde7bddb8e76c4d2c0705d07ef7910cc3b376bdc2667c623d35372"
+  },
+  "evaluation_metrics": {
+    "true_positives": 36,
+    "false_positives": 0,
+    "false_negatives": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0,
+    "total_ground_truth": 36,
+    "total_detected": 36,
+    "per_issue_breakdown": {
+      "ASSET_DOUBLE_ASSIGNMENT": {
+        "ground_truth_count": 4,
+        "detected_count": 4,
+        "true_positives": 4,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0
+      },
+      "DEPARTMENT_CHANGE_MID_PROCESS": {
+        "ground_truth_count": 5,
+        "detected_count": 5,
+        "true_positives": 5,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0
+      },
+      "MISSING_MANAGER": {
+        "ground_truth_count": 5,
+        "detected_count": 5,
+        "true_positives": 5,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0
+      },
+      "OVERDUE_INCOMPLETE_TASK": {
+        "ground_truth_count": 7,
+        "detected_count": 7,
+        "true_positives": 7,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0
+      },
+      "STARTED_BEFORE_BACKGROUND_CHECK": {
+        "ground_truth_count": 5,
+        "detected_count": 5,
+        "true_positives": 5,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0
+      },
+      "TASK_COMPLETED_BEFORE_PREREQUISITE": {
+        "ground_truth_count": 5,
+        "detected_count": 5,
+        "true_positives": 5,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0
+      },
+      "TERMINATED_EMPLOYEE_ACTIVE_ACCESS": {
+        "ground_truth_count": 5,
+        "detected_count": 5,
+        "true_positives": 5,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0
+      }
+    }
+  }
+}
