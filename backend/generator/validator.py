@@ -1,5 +1,5 @@
 from typing import List, Dict, Any, Optional, Set, Tuple
-from datetime import datetime, timezone
+from datetime import datetime, timezone, date
 import json
 from collections import defaultdict
 
@@ -29,13 +29,44 @@ from backend.app.models.entities import (
 )
 
 
+def ensure_utc(dt: Any) -> Optional[datetime]:
+    """
+    Normalizes a datetime, date, or ISO string to a UTC-aware datetime.
+    Preserves exact UTC/date semantics across storage engines (e.g. SQLite returning naive datetimes).
+    - If dt is None, returns None.
+    - If dt is a string, parses ISO format (handling optional 'Z') and normalizes to UTC.
+    - If dt is an offset-naive datetime, attaches timezone.utc (standard SQLite UTC representation).
+    - If dt is an offset-aware datetime, converts to UTC via astimezone(timezone.utc).
+    - If dt is a date (not datetime), converts to midnight UTC.
+    """
+    if dt is None:
+        return None
+    if isinstance(dt, str):
+        try:
+            clean_str = dt.replace("Z", "+00:00")
+            dt = datetime.fromisoformat(clean_str)
+        except Exception:
+            return None
+    if isinstance(dt, datetime):
+        if dt.tzinfo is None or dt.tzinfo.utcoffset(dt) is None:
+            return dt.replace(tzinfo=timezone.utc)
+        return dt.astimezone(timezone.utc)
+    if isinstance(dt, date):
+        return datetime(dt.year, dt.month, dt.day, 0, 0, 0, tzinfo=timezone.utc)
+    return None
+
+
 class RuleBasedValidator:
     """Independent validator that inspects database tables/records WITHOUT reading ground_truth."""
 
     def __init__(self, ref_date: Optional[datetime] = None):
-        self.ref_date = ref_date or datetime(2026, 11, 1, 0, 0, 0, tzinfo=timezone.utc)
+        self.ref_date = ensure_utc(ref_date) or datetime(2026, 11, 1, 0, 0, 0, tzinfo=timezone.utc)
         self.integrity_failures: List[Dict[str, Any]] = []
         self.detected_anomalies: List[Dict[str, Any]] = []
+
+    def _to_utc(self, dt: Any) -> Optional[datetime]:
+        """Convenience method to normalize datetimes to UTC-aware."""
+        return ensure_utc(dt)
 
     def validate_dataset(
         self,
@@ -199,8 +230,9 @@ class RuleBasedValidator:
         # Rule 6: Overdue Incomplete Tasks (RULE-TASK-006)
         for task in task_instances:
             if task.status in [TaskStatus.PENDING.value, TaskStatus.IN_PROGRESS.value, TaskStatus.BLOCKED.value]:
-                if task.due_date and task.due_date < self.ref_date:
-                    days_overdue = (self.ref_date - task.due_date).days
+                task_due = self._to_utc(task.due_date)
+                if task_due and task_due < self.ref_date:
+                    days_overdue = (self.ref_date - task_due).days
                     self.detected_anomalies.append({
                         "rule_id": "RULE-TASK-006",
                         "issue_type": "OVERDUE_INCOMPLETE_TASK",
@@ -318,9 +350,11 @@ class RuleBasedValidator:
                     if pred_task:
                         # Anomaly condition: Predecessor is NOT completed, or completed AFTER successor
                         is_violation = False
+                        pred_completed = self._to_utc(pred_task.completed_at)
+                        succ_completed = self._to_utc(succ_task.completed_at)
                         if pred_task.status != TaskStatus.COMPLETED.value:
                             is_violation = True
-                        elif pred_task.completed_at and succ_task.completed_at and pred_task.completed_at > succ_task.completed_at:
+                        elif pred_completed and succ_completed and pred_completed > succ_completed:
                             is_violation = True
 
                         if is_violation:
@@ -371,15 +405,17 @@ class RuleBasedValidator:
         bg_tasks_by_case = {t.case_id: t for t in tasks if t.template_id == "TPL-002"}
 
         for emp in employees:
-            if emp.start_date and emp.start_date <= self.ref_date:
+            emp_start = self._to_utc(emp.start_date)
+            if emp_start and emp_start <= self.ref_date:
                 case = case_by_emp.get(emp.employee_id)
                 if case:
                     bg_task = bg_tasks_by_case.get(case.case_id)
                     if bg_task:
                         violation = False
+                        bg_completed = self._to_utc(bg_task.completed_at)
                         if bg_task.status != TaskStatus.COMPLETED.value and emp.status == EmployeeStatus.ACTIVE.value:
                             violation = True
-                        elif bg_task.completed_at and bg_task.completed_at > emp.start_date:
+                        elif bg_completed and bg_completed > emp_start:
                             violation = True
 
                         if violation:
@@ -413,9 +449,12 @@ class RuleBasedValidator:
                 if case:
                     # Check if transfer occurred while onboarding was active
                     # Onboarding active window: case.created_at to case.completed_at (or ref_date)
-                    end_window = case.completed_at or self.ref_date
+                    case_completed = self._to_utc(case.completed_at)
+                    case_created = self._to_utc(case.created_at)
+                    end_window = case_completed or self.ref_date
                     for r in records:
-                        if r.effective_start_date > case.created_at and r.effective_start_date <= end_window:
+                        r_start = self._to_utc(r.effective_start_date)
+                        if r_start and case_created and r_start > case_created and r_start <= end_window:
                             self.detected_anomalies.append({
                                 "rule_id": "RULE-ONB-007",
                                 "issue_type": "DEPARTMENT_CHANGE_MID_PROCESS",
